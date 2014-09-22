@@ -107,7 +107,7 @@ public class Level extends Rectangle {
     }
 
     public void building(int camX, int camY, int renW, int renH) {
-        if (Component.isMouseLeft || Component.isMouseRight) {
+        if (Component.isMouseLeft) {
             for (int x = (camX / Tile.tileSize); x < (camX / Tile.tileSize) + renW; x++) {
 
                 for (int y = (camY / Tile.tileSize); y < (camY / Tile.tileSize) + renH; y++) {
@@ -115,6 +115,23 @@ public class Level extends Rectangle {
                     if (x >= 0 && y >= 0 && x < worldW && y < worldH) {
                         if (block[x][y].contains(new Point((Component.mse.x + (int) Component.sX * Component.pixelSize) / Component.pixelSize, (Component.mse.y + (int) Component.sY * Component.pixelSize) / Component.pixelSize))) {
                             block[x][y].id = Tile.air;
+                            break;
+                        }
+
+                    }
+
+                }
+            }
+        }
+
+        if (Component.isMouseRight) {
+            for (int x = (camX / Tile.tileSize); x < (camX / Tile.tileSize) + renW; x++) {
+
+                for (int y = (camY / Tile.tileSize); y < (camY / Tile.tileSize) + renH; y++) {
+
+                    if (x >= 0 && y >= 0 && x < worldW && y < worldH) {
+                        if (block[x][y].contains(new Point((Component.mse.x + (int) Component.sX * Component.pixelSize) / Component.pixelSize, (Component.mse.y + (int) Component.sY * Component.pixelSize) / Component.pixelSize))) {
+                            block[x][y].id = Tile.sand;
                             break;
                         }
 
