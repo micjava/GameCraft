@@ -37,7 +37,7 @@ public class Listening implements KeyListener, MouseListener, MouseMotionListene
                 Component.isJumping = true;
 
                 break;
-		//
+            //
             // case KeyEvent.VK_S:
             //
             // break;
@@ -91,11 +91,19 @@ public class Listening implements KeyListener, MouseListener, MouseMotionListene
     }
 
     public void mousePressed(MouseEvent e) {
-
+        if (e.getButton() == MouseEvent.BUTTON1) {
+            Component.isMouseLeft = true;
+        } else if (e.getButton() == MouseEvent.BUTTON3) {
+            Component.isMouseRight = true;
+        }
     }
 
     public void mouseReleased(MouseEvent e) {
-
+        if (e.getButton() == MouseEvent.BUTTON1) {
+            Component.isMouseLeft = false;
+        } else if (e.getButton() == MouseEvent.BUTTON3) {
+            Component.isMouseRight = false;
+        }
     }
 
     public void mouseEntered(MouseEvent e) {
@@ -107,11 +115,11 @@ public class Listening implements KeyListener, MouseListener, MouseMotionListene
     }
 
     public void mouseDragged(MouseEvent e) {
-
+        Component.mse.setLocation(e.getX(), e.getY());
     }
 
     public void mouseMoved(MouseEvent e) {
-
+        Component.mse.setLocation(e.getX(), e.getY());
     }
 
 }

@@ -1,179 +1,193 @@
 package gamecraftmaven.pl.vgh.javanerd;
 
 /*package com.example.gamecraftmaven.pl.vgh.javanerd;*/
-
 import gamecraftmaven.pl.vgh.javanerd.Tile;
 import java.applet.Applet;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Point;
 
 /**
  * @author Michal Leja class with components to draw
  */
-
 public class Component extends Applet implements Runnable {
-	
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * size of pixel
-	 * 
-	 */
-	private static int pixelSize = 2;
-		
-        public static int moveFromBorder = 0;
-	/**sX, sY side scrolling coordinates
-	 * 
-	 */
-	//public static int moveFromBorder = 0; !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! mieszal pod koniec Tutka1
-	public static double sX = moveFromBorder, sY = moveFromBorder;
-	
-	/**movement direction variable
-	 * 
-	 */
-	public static double dir=0;
-	
-	
-	
-	/**
-	 * Screen resolution
-	 * 
-	 */
-	public static Dimension size = new Dimension(700, 560);
+    /**
+     * size of pixel
+     *
+     */
+    private static int pixelSize = 2;
 
-	/**
-	 * creating pixel 2.2
-	 * 
-	 */
-	public static Dimension pixel = new Dimension(size.width / pixelSize, size.height
-			/ pixelSize);
+    public static int moveFromBorder = 0;
+    /**
+     * sX, sY side scrolling coordinates
+     *
+     */
+    //public static int moveFromBorder = 0; !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! mieszal pod koniec Tutka1
+    public static double sX = moveFromBorder, sY = moveFromBorder;
 
-	/**
-	 * Name of game/frame
-	 * 
-	 */
-	public static String name = "Minecraft 2D Adventure";
+    /**
+     * movement direction variable
+     *
+     */
+    public static double dir = 0;
 
-	/**
-	 * (this)Thread running boolean
-	 * 
-	 */
-	public boolean isRunning = false;
-	
-	/** checking is moving
-	 * 
-	 */
-	public static boolean isMoving = false;
+    /**
+     * Screen resolution
+     *
+     */
+    public static Dimension size = new Dimension(700, 560);
 
-	/**
-	 * ver 1 1L
-	 * 
-	 */
+    /**
+     * creating pixel 2.2
+     *
+     */
+    public static Dimension pixel = new Dimension(size.width / pixelSize, size.height
+            / pixelSize);
+    /**
+     * Point where mouse is
+     *
+     */
+    public static Point mse = new Point(0, 0);
 
-	public static boolean isJumping = false;
-	
-	private Image screen;
+    /**
+     * Name of game/frame
+     *
+     */
+    public static String name = "Minecraft 2D Adventure";
 
-	
-	/** creating Level named level
-	 * 
-	 */
-	public static Level level;
+    /**
+     * (this)Thread running boolean
+     *
+     */
+    public boolean isRunning = false;
 
-	/**creating Character named character
-	 * 
-	 */
-	public static Character character;
-	
-	/**
-	 * Component constructor
-	 * 
-	 */
-	public Component() {
+    /**
+     * checking is moving
+     *
+     */
+    public static boolean isMoving = false;
 
-		setPreferredSize(size);
-		addKeyListener(new Listening());
-	}
+    /**
+     * ver 1 1L
+     *
+     */
+    public static boolean isJumping = false;
+    
+    /**
+     * For Mouse Motion Listener
+     *
+     */
+    public static boolean isMouseLeft = false;
+    public static boolean isMouseRight = false;
+    
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.applet.Applet#start()
-	 */
-	public void start() {
-		// Defining objects etc.
-		new Tile();
-		level = new Level();
-		character = new Character(Tile.tileSize,Tile.tileSize*2);
-		
-		
-		// starting game loops
-		isRunning = true;
-		new Thread(this).start();
-	}
+    private Image screen;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.applet.Applet#stop()
-	 */
-	public void stop() {
-		isRunning = false;
-	}
+    /**
+     * creating Level named level
+     *
+     */
+    public static Level level;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Runnable#run()
-	 */
-	@Override
-	public void run() {
+    /**
+     * creating Character named character
+     *
+     */
+    public static Character character;
 
-		screen = createVolatileImage(pixel.width, pixel.height);
+    /**
+     * Component constructor
+     *
+     */
+    public Component() {
 
-		while (isRunning) {
+        setPreferredSize(size);
+        addKeyListener(new Listening());
+        addMouseListener(new Listening());
+        addMouseMotionListener(new Listening());
+        addMouseWheelListener(new Listening());
+    }
 
-			tick();
-			render();
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.applet.Applet#start()
+     */
+    public void start() {
+        // Defining objects etc.
+        new Tile();
+        level = new Level();
+        character = new Character(Tile.tileSize, Tile.tileSize * 2);
 
-			try {
-				Thread.sleep(4);
-			} catch (Exception e) {
-			}
-		}
-	}
+        // starting game loops
+        isRunning = true;
+        new Thread(this).start();
+    }
 
-	/**
-	 * drawing pictures on screen Class: Graphics.
-	 */
-	public void render() {
-		Graphics g = screen.getGraphics();
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.applet.Applet#stop()
+     */
+    public void stop() {
+        isRunning = false;
+    }
 
-		g.setColor(new Color(100, 100, 255));
-		g.fillRect(0, 0, pixel.width, pixel.height);
-		
-		level.render(g, (int)sX, (int)sY, (pixel.width/Tile.tileSize)+2,(pixel.height/Tile.tileSize)+2);
-		character.render(g);
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Runnable#run()
+     */
+    @Override
+    public void run() {
 
-		g = getGraphics();
+        screen = createVolatileImage(pixel.width, pixel.height);
 
-		g.drawImage(screen, 0, 0, size.width, size.height, 0, 0, pixel.width,
-				pixel.height, null);
+        while (isRunning) {
 
-		g.dispose();
+            tick();
+            render();
 
-	}
+            try {
+                Thread.sleep(4);
+            } catch (Exception e) {
+            }
+        }
+    }
 
-	/**
-	 * etc. moving player, monster
-	 * 
-	 */
-	public void tick() {
-          //  Component.sY +=0.4;
-		level.tick();
-		character.tick();
-	}
+    /**
+     * drawing pictures on screen Class: Graphics.
+     */
+    public void render() {
+        Graphics g = screen.getGraphics();
+
+        g.setColor(new Color(100, 100, 255));
+        g.fillRect(0, 0, pixel.width, pixel.height);
+
+        level.render(g, (int) sX, (int) sY, (pixel.width / Tile.tileSize) + 2, (pixel.height / Tile.tileSize) + 2);
+        character.render(g);
+
+        g = getGraphics();
+
+        g.drawImage(screen, 0, 0, size.width, size.height, 0, 0, pixel.width,
+                pixel.height, null);
+
+        g.dispose();
+
+    }
+
+    /**
+     * etc. moving player, monster
+     *
+     */
+    public void tick() {
+        //  Component.sY +=0.4;
+        level.tick();
+        character.tick();
+    }
 }
