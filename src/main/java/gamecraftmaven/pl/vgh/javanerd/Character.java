@@ -27,8 +27,16 @@ public class Character extends DoubleRectangle {
      * jumping height variable jumping count
      */
     public int jumpingHeight = 50, jumpingCount = 0;
+    
+    /**
+     * animation parameter
+     */
 
     public int animation = 0;
+    
+    /**
+     * animationFrame - klatka animacji, AnimationTime - czas animacji
+     */
 
     public int animationFrame, animationTime = 20;
 
