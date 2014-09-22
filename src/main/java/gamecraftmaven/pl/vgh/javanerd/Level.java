@@ -2,6 +2,7 @@ package gamecraftmaven.pl.vgh.javanerd;
 
 import gamecraftmaven.pl.vgh.javanerd.Tile;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.Random;
 
@@ -93,9 +94,17 @@ public class Level extends Rectangle {
         for (int x = 0; x < block.length; x++) {
 
             for (int y = 0; y < block[0].length; y++) {
-                if(block[x][y].id == Tile.earth && block[x][y-1].id == Tile.air){
+                if (block[x][y].id == Tile.earth && block[x][y - 1].id == Tile.air) {
                     block[x][y].id = Tile.grass;
                 }
+            }
+        }
+
+        //placing grass box
+        for (int x = 0; x < block.length; x++) {
+
+            for (int y = 0; y < block[0].length; y++) {
+                block[x][y].id = Tile.earth;
             }
         }
     }
@@ -105,8 +114,21 @@ public class Level extends Rectangle {
                 || (block[0].length - 1) == y;
     }
 
-    public void tick() {
+    public void building(int camX, int camY, int renW, int renH) {
+        for (int x = (camX / Tile.tileSize); x < (camX / Tile.tileSize) + renW; x++) {
 
+            for (int y = (camY / Tile.tileSize); y < (camY / Tile.tileSize) + renH; y++) {
+
+                if (x >= 0 && y >= 0 && x < worldW && y < worldH) {
+                    if(block[x][y].contains(new Point(0,0)));
+                }
+
+            }
+        }
+    }
+
+    public void tick(int camX, int camY, int renW, int renH) {
+        building(camX, camY, renW, renH);
     }
 
     public void render(Graphics g, int camX, int camY, int renW, int renH) {

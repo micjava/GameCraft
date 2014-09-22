@@ -20,7 +20,7 @@ public class Component extends Applet implements Runnable {
      * size of pixel
      *
      */
-    private static int pixelSize = 2;
+    public static int pixelSize = 2;
 
     public static int moveFromBorder = 0;
     /**
@@ -77,14 +77,13 @@ public class Component extends Applet implements Runnable {
      *
      */
     public static boolean isJumping = false;
-    
+
     /**
      * For Mouse Motion Listener
      *
      */
     public static boolean isMouseLeft = false;
     public static boolean isMouseRight = false;
-    
 
     private Image screen;
 
@@ -187,7 +186,7 @@ public class Component extends Applet implements Runnable {
      */
     public void tick() {
         //  Component.sY +=0.4;
-        level.tick();
+        level.tick((int) sX, (int) sY, (pixel.width / Tile.tileSize) + 2, (pixel.height / Tile.tileSize) + 2);
         character.tick();
     }
 }
