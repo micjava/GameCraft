@@ -5,107 +5,113 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 
-public class Listening implements KeyListener, MouseListener, MouseMotionListener {
+public class Listening implements KeyListener, MouseListener, MouseMotionListener, MouseWheelListener {
 
-	@Override
-	public void keyPressed(KeyEvent e) {
+    @Override
+    public void keyPressed(KeyEvent e) {
 
-		int key = e.getKeyCode();
+        int key = e.getKeyCode();
 
-		switch (key) {
-		case KeyEvent.VK_D:
+        switch (key) {
+            case KeyEvent.VK_D:
 
-			Component.isMoving = true;
+                Component.isMoving = true;
 
-			Component.dir = Component.character.movementSpeed;
+                Component.dir = Component.character.movementSpeed;
 
-			break;
+                break;
 
-		case KeyEvent.VK_A:
+            case KeyEvent.VK_A:
 
-			Component.isMoving = true;
+                Component.isMoving = true;
 
-			Component.dir = -Component.character.movementSpeed;
+                Component.dir = -Component.character.movementSpeed;
 
-			break;
+                break;
 
-		case KeyEvent.VK_W:
+            case KeyEvent.VK_W:
 
-			Component.isJumping = true;
-			
-			break;
+                Component.isJumping = true;
+
+                break;
 		//
-		// case KeyEvent.VK_S:
-		//
-		// break;
+            // case KeyEvent.VK_S:
+            //
+            // break;
 
-		}
-	}
+        }
+    }
 
-	@Override
-	public void keyReleased(KeyEvent e) {
+    @Override
+    public void keyReleased(KeyEvent e) {
 
-		int key = e.getKeyCode();
+        int key = e.getKeyCode();
 
-		switch (key) {
-		case KeyEvent.VK_D:
+        switch (key) {
+            case KeyEvent.VK_D:
 
-			if (Component.dir == Component.character.movementSpeed) {
+                if (Component.dir == Component.character.movementSpeed) {
 
-				Component.isMoving = false;
+                    Component.isMoving = false;
 
-			}
-			break;
+                }
+                break;
 
-		case KeyEvent.VK_A:
+            case KeyEvent.VK_A:
 
-			if (Component.dir == -Component.character.movementSpeed) {
+                if (Component.dir == -Component.character.movementSpeed) {
 
-				Component.isMoving = false;
+                    Component.isMoving = false;
 
-			}
-			break;
+                }
+                break;
 
-		case KeyEvent.VK_W:
+            case KeyEvent.VK_W:
 
-			Component.isJumping = false;
-			
-			break;
-		}
-	}
+                Component.isJumping = false;
 
-	@Override
-	public void keyTyped(KeyEvent e) {
+                break;
+        }
+    }
 
-	}
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    public void mouseWheelMoved(MouseWheelEvent e) {
+
+    }
 
     public void mouseClicked(MouseEvent e) {
-          
+
     }
 
     public void mousePressed(MouseEvent e) {
-          
+
     }
 
     public void mouseReleased(MouseEvent e) {
-          
+
     }
 
     public void mouseEntered(MouseEvent e) {
-          
+
     }
 
     public void mouseExited(MouseEvent e) {
-          
+
     }
 
     public void mouseDragged(MouseEvent e) {
-          
+
     }
 
     public void mouseMoved(MouseEvent e) {
-          
+
     }
 
 }
