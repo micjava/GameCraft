@@ -99,14 +99,6 @@ public class Level extends Rectangle {
                 }
             }
         }
-
-        //placing grass box
-        for (int x = 0; x < block.length; x++) {
-
-            for (int y = 0; y < block[0].length; y++) {
-                block[x][y].id = Tile.earth;
-            }
-        }
     }
 
     private boolean isBlockPlaceable(int x, int y) {
@@ -115,14 +107,20 @@ public class Level extends Rectangle {
     }
 
     public void building(int camX, int camY, int renW, int renH) {
-        for (int x = (camX / Tile.tileSize); x < (camX / Tile.tileSize) + renW; x++) {
+        if (Component.isMouseLeft || Component.isMouseRight) {
+            for (int x = (camX / Tile.tileSize); x < (camX / Tile.tileSize) + renW; x++) {
 
-            for (int y = (camY / Tile.tileSize); y < (camY / Tile.tileSize) + renH; y++) {
+                for (int y = (camY / Tile.tileSize); y < (camY / Tile.tileSize) + renH; y++) {
 
-                if (x >= 0 && y >= 0 && x < worldW && y < worldH) {
-                    if(block[x][y].contains(new Point(0,0)));
+                    if (x >= 0 && y >= 0 && x < worldW && y < worldH) {
+                        if (block[x][y].contains(new Point((Component.mse.x + (int) Component.sX * Component.pixelSize) / Component.pixelSize, (Component.mse.y + (int) Component.sY * Component.pixelSize) / Component.pixelSize))) {
+                            block[x][y].id = Tile.air;
+                            break;
+                        }
+
+                    }
+
                 }
-
             }
         }
     }
